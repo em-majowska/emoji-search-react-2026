@@ -8,6 +8,7 @@ import Line from "./components/Line";
 
 function App() {
   const [search, setSearch] = useState("");
+  const [currentHover, setCurrentHover] = useState(null);
 
   const createLine = (item, index) => {
     return (
@@ -15,30 +16,26 @@ function App() {
         key={`${index} ${item.title}`}
         emoji={item.symbol}
         name={item.title}
+        setCurrentHover={setCurrentHover}
+        currentHover={currentHover}
+        index={index}
       />
     );
   };
-
-  const firstPopulate = emojiList.map((item, index) => {
-    if (index > 21) return;
-
-    return createLine(item, index);
-  });
-
-  const [results, setResults] = useState(firstPopulate);
 
   return (
     <>
       <Header text="😎 Emoji Search 😎" className="container" />
       <main>
-        <Search
-          search={search}
-          setSearch={setSearch}
-          setResults={setResults}
-          data={emojiList}
-          createLine={createLine}
-        />
-        <div className="results">{results}</div>
+        <Search search={search} setSearch={setSearch} data={emojiList} />
+        <div className="results">
+          {emojiList
+            .filter((element) => element.keywords.includes(search))
+            .slice(0, 21)
+            .map((item, index) => {
+              return createLine(item, index);
+            })}
+        </div>
       </main>
       <Footer />
     </>

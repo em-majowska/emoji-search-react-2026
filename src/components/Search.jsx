@@ -1,16 +1,6 @@
 const Search = (props) => {
   const searchEmoji = (value) => {
     props.setSearch(value);
-
-    const filtered = props.data.filter((item) => {
-      return item.keywords.includes(value);
-    });
-
-    const results = filtered.map((item, index) => {
-      return props.createLine(item, index);
-    });
-
-    props.setResults(results);
   };
 
   return (

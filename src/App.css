@@ -56,15 +56,10 @@ input {
   .copy {
     margin-inline: auto 0;
     font-size: 0.875rem;
-    visibility: hidden;
   }
 
   button:hover {
     background-color: #e9e6e6;
-  }
-
-  button:hover .copy {
-    visibility: visible;
   }
 }
 
